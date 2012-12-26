@@ -1,7 +1,7 @@
 /*
  * Class Cruiser
- * Describes a Cruiser Ship of lenght 3.
- * Length of 1
+ * Two Cruisers in a Game.
+ * Length of 3
  *
  */
 package Battleships;

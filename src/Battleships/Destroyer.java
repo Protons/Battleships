@@ -1,6 +1,6 @@
 /*
  * Class Destroyer
- * Describes a Destroyer Ship.
+ * Three Destroyer Ships in the Game.
  * Length of 2
  *
  */
