@@ -7,6 +7,10 @@ public class Ship {
 	boolean horizontal;
 	boolean[] hit = new boolean[4];
 
+	public Ship(int size, String string, String string2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	boolean okToPlaceShipAt(int row, int column, boolean horizontal, OceanTest oceanTest) {
 		return false;
 	}
