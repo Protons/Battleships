@@ -28,6 +28,7 @@ public class Ocean {
         setShotsFired(0);
         setHitCount(0);
         setShipsSunk(0);
+       
     }
     @Override
     public String toString() { // this replaces the "print" method of the spec
@@ -103,4 +104,9 @@ public class Ocean {
 	public void setShipsSunk(int shipsSunk) {
 		this.shipsSunk = shipsSunk;
 	}
+	public Ship[][] getShipArray() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
