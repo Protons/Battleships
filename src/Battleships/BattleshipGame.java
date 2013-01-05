@@ -7,10 +7,8 @@ public class BattleshipGame {
 	 */
 	public static void main(String[] args) {
 		Ocean sea = new Ocean();
-		//sea.placeAllShipsRandomly();
+		sea.placeAllShipsRandomly();
 		System.out.print(sea);
 	}
-
-
 
 }
