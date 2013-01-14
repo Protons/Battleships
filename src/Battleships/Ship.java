@@ -162,8 +162,8 @@ public abstract class Ship {
 			return false; // it's not a hit
 		} else {
 			// it's a hit. Work out offset & set that position in hit array to true
-		hit[(row - getBowRow() + column - getBowColumn())] = true;
-		//System.out.println("Value must be true = " + hit[(row - getBowRow() + column - getBowColumn())]); 
+			hit[(row - getBowRow() + column - getBowColumn())] = true;
+		
 				return true;
 		}
 	}
@@ -180,7 +180,9 @@ public abstract class Ship {
 
 	private boolean isHorizontal() {
 		// TODO Auto-generated method stub
-		return false;
+		return horizontal;
+		
+		
 	}
 
 	/**
@@ -190,13 +192,13 @@ public abstract class Ship {
 	 */
 	public boolean isSunk() {
 
-		for (boolean c : hit)
-			System.out.println("The Value of b is " + c);
+	//	for (boolean c : hit)
+	//		System.out.println("The Value of b is " + c);
 			
-		for (boolean b : hit){
+		for (boolean b : hit)
 			if (b == false)
 				return false;
-			} 
+			
 				return true;
 	}
 	
@@ -215,7 +217,7 @@ public abstract class Ship {
 				brow++;
 			}
 			
-			System.out.println("Bow Column " + getBowColumn() + " Bow Row " + getBowRow() + " Is Horizontal " + isHorizontal());
+			//System.out.println("Bow Column " + getBowColumn() + " Bow Row " + getBowRow() + " Is Horizontal " + isHorizontal());
 			//row = row + i;
 			
 		}
