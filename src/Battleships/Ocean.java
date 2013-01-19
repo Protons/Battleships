@@ -77,12 +77,13 @@ public class Ocean {
 		return buffer.toString();
 	}
 
-	private void setShipsSunk(int i) {
-		shipsSunk = shipsSunk + i;
+	private void setShipsSunk(int i){
+		// If not initialised add one to hit count 
+		if (i!=0)
+		shipsSunk = shipsSunk + 1;
 	}
 
 	private void setHitCount(int i) {
-		// TODO Auto-generated method stub
 		// If not initialised add one to hit count 
 		if (i!=0)
 		hitCount = hitCount + 1;
@@ -90,10 +91,16 @@ public class Ocean {
 	}
 
 	private void setShotsFired(int i) {
-		// TODO Auto-generated method stub
+		// If not initialised add one to hit count 
+		if (i!=0)
 		shotsFired = shotsFired + 1;
 	}
-
+	
+	private Object getShipsSunk() {
+		// TODO Auto-generated method stub
+		
+		return (this.shipsSunk);
+	}
 	/**
 	 * @return the size of the row/column
 	 */
@@ -175,7 +182,8 @@ public class Ocean {
 			setHitCount(getHitCount() + 1);
 			if (board[row][column].isSunk())
 			{
-				//System.out.println("The board is " + board[row][column].isSunk());
+				//Add one to ships sunk;
+				setShipsSunk(1);
 				return true;
 			}	
 		}
@@ -201,10 +209,11 @@ public class Ocean {
 
 	public boolean isGameOver() {
 		System.out.println("The get ship sunk is " + this.getShipsSunk());
-		
+		System.out.println("The shots fired is " + this.shotsFired);
+		System.out.println("The hit count is " + this.hitCount);
 		// check whether all board in fleet have been sunk
-	//	if (this.getShipsSunk().equals(UPPER))
-	//		return true;
+		if (this.getShipsSunk().equals(UPPER))
+			return true;
 		
 		return false;
 	}
@@ -226,19 +235,15 @@ public class Ocean {
 	 */
 	public String printFinalScores() {
 		StringBuilder strbld = new StringBuilder();
-		strbld.append("GAME OVER!! You scored ").append(this.getHitCount())
+		strbld.append("GAME OVER!! You scored ").append(this.hitCount)
 				.append(".");
 		strbld.append("You sank ").append(this.getShipsSunk()).append(" ships");
-		strbld.append(" and used ").append(this.getShotsFired())
+		strbld.append(" and used ").append(this.shotsFired)
 				.append(" shots" + ".");
 		return strbld.toString();
 	}
 
-	private Object getShipsSunk() {
-		// TODO Auto-generated method stub
-		
-		return (this.shipsSunk);
-	}
+
 
 	public void updateBoard(int row, int column, Ocean ocean) {
 
@@ -259,7 +264,7 @@ public class Ocean {
 		//	Ship sub = new BattleShip();
 		//System.out.println("BAt is " + sub);
 			
-			setShipsSunk(1);
+			//setShipsSunk(1);
 		} 
 		else 
 		{
