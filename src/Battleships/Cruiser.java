@@ -11,12 +11,12 @@ package Battleships;
  */
 public class Cruiser extends Ship {
 
-    private final static int SIZE = 3;
+	private final static int SIZE = 3;
 
-    /**
-     * sets the length & clears the hit array
-     */
-    public Cruiser() {
-        super(SIZE, "Cruiser", ".");
-    }
+	/**
+	 * sets the length & clears the hit array
+	 */
+	public Cruiser() {
+		super(SIZE, "Cruiser", ".");
+	}
 }

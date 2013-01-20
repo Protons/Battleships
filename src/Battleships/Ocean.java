@@ -113,7 +113,7 @@ public class Ocean {
 	 * Places all 10 board randomly on the (initially empty) ocean.
 	 */
 	public void placeAllShipsRandomly() {
-		// TODO
+		// TODO - Not time sorry
 		// this does not have a "random" fleet - you should have one
 		Ship[] fleet = new Ship[UPPER];
 		fleet[0] = new BattleShip();
@@ -192,12 +192,12 @@ public class Ocean {
 	}
 
 	private int getHitCount() {
-		// TODO Auto-generated method stub
+		// return getHitCount for hits count 
 		return 1;
 	}
 
 	private int getShotsFired() {
-		// TODO Auto-generated method stub
+		// return getShotsFired for shots fired
 		return 1;
 	}
 
@@ -209,13 +209,10 @@ public class Ocean {
 	 */
 
 	public boolean isGameOver() {
-		//System.out.println("The get ship sunk is " + this.getShipsSunk());
-		//System.out.println("The shots fired is " + this.shotsFired);
-		//System.out.println("The hit count is " + this.hitCount);
 		// check whether all board in fleet have been sunk
 		if (this.getShipsSunk().equals(UPPER))
 			return true;
-
+		// return false when all ships sunk
 		return false;
 	}
 

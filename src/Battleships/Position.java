@@ -1,3 +1,8 @@
+/*
+ * Class Position
+ * Gets the position of X and Y from user input. I forgot you had yours and made my own.
+ *
+ */
 package Battleships;
 
 public class Position {
@@ -10,13 +15,13 @@ public class Position {
 	}
 
 	public int getX() {
-		// TODO Auto-generated method stub
+		// returns the row of position
 		return row;
 	}
 
 	public int getY() {
-		// TODO Auto-generated method stub
+		// returns the column of position
 		return column;
-		}
+	}
 
 }
