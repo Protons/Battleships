@@ -38,7 +38,6 @@ public abstract class Ship {
 	 * 1; and "empty sea" 1.
 	 */
 	protected boolean[] hit;
-	
 
 	/**
 	 * clears the hit array indicating whether that part of the "Ship" has been
@@ -62,38 +61,83 @@ public abstract class Ship {
 	 *            that will contain the bow
 	 * @param column
 	 *            that will contain the bow
-	 * @param horizontal = true if horizontal
+	 * @param horizontal
+	 *            = true if horizontal
 	 * @param ocean
 	 * @return true if it is okay to put a ship of this size with its bow in
 	 *         this location, with the given orientation.
 	 */
 	public boolean okToPlaceShipAt(int row, int column, boolean horizontal,
 			Ocean ocean) {
-		// Try to catch exception error if ship goes past board
+		// Try to catch exception error if ship goes past board could have used ocean.getDimensions
 		try{
 			Ship ships[][] = ocean.getShipArray();
-						
-			for (int i = 0; i < getSize(); i++){
-			if (!(ships[row][column] instanceof EmptySea)){	
-			//	Can't Print here 
-					return false;
-			}else{
-				if (horizontal) {
-					column++; 
-				} else {
-					row++;	
-					}
-				}
+			//System.out.println("The row is " + row + " the column is " + column + " the size is " + getSize() + " and horizontal is " + horizontal); 	
+			
+			// check if another ship is on either left size or right
+			if (row + getSize() < ocean.getDimension())
+			{	
+				// to the bottom of ship when vertical
+				if (!horizontal && !(ships[row + getSize()][column] instanceof EmptySea)) 
+				return false;
 			}
+			if ((row - 1) >= 0)
+			{
+				if (!horizontal && !(ships[row -1][column] instanceof EmptySea)) // to the top of ship when vertical
+				return false;
+			}
+			if ((column -1) >= 0)
+			{
+				if (horizontal && !(ships[row][column - 1] instanceof EmptySea)) // to the left of ship when horizontal
+				return false;
+			}
+			if (column + getSize() < ocean.getDimension())
+			{
+				if (horizontal && !(ships[row][column + getSize()] instanceof EmptySea)) // to the right of ship when horizontal
+				return false;
+			}
+			
+			for (int i = 0; i < getSize(); i++)
+		{
+			if (!(ships[row][column] instanceof EmptySea)) 
+			{
+				return false;
+			}
+			else if (horizontal && !(ships[row + 1][column] instanceof EmptySea) && ((row + 1) < ocean.getDimension())) //below
+			{
+				return false;
+			} 
+			else if (horizontal && !(ships[row - 1][column] instanceof EmptySea) && ((row - 1) >= 0)) // above
+			{
+				return false;
+			} 
+			else if (!horizontal && !(ships[row][column + 1] instanceof EmptySea) && ((column + 1) < ocean.getDimension())) // to the left
+			{
+				return false;
+			}
+			else if (!horizontal && !(ships[row][column - 1] instanceof EmptySea) && ((column -1) >= 0)) // to the right
+			{
+				return false;
+			} 
+			else 
+			{
+				if (horizontal) 
+				{
+					column++;
+				}else 
+				{
+					row++;	
+				}
+			}	
+			
+		}	
 			return true;
 		}
-		catch(Exception err){
-		//	System.out.println("OMG an error");
+	
+		catch(Exception err)
+		{
 			return false;
 		} 
-
-	
-		
 	}
 
 	/**
@@ -158,13 +202,14 @@ public abstract class Ship {
 	 */
 	public boolean shootAt(int row, int column) {
 		if ((isHorizontal() && (row != getBowRow()))
-				|| (!isHorizontal() && (column != getBowColumn()))){
+				|| (!isHorizontal() && (column != getBowColumn()))) {
 			return false; // it's not a hit
 		} else {
-			// it's a hit. Work out offset & set that position in hit array to true
+			// it's a hit. Work out offset & set that position in hit array to
+			// true
 			hit[(row - getBowRow() + column - getBowColumn())] = true;
-		
-				return true;
+
+			return true;
 		}
 	}
 
@@ -181,8 +226,7 @@ public abstract class Ship {
 	private boolean isHorizontal() {
 		// TODO Auto-generated method stub
 		return horizontal;
-		
-		
+
 	}
 
 	/**
@@ -192,36 +236,37 @@ public abstract class Ship {
 	 */
 	public boolean isSunk() {
 
-	//	for (boolean c : hit)
-	//		System.out.println("The Value of b is " + c);
-			
+		// for (boolean c : hit)
+		// System.out.println("The Value of b is " + c);
+
 		for (boolean b : hit)
 			if (b == false)
 				return false;
-			
-				return true;
+
+		return true;
 	}
-	
+
 	public void sinkShip(Ocean ocean) {
 		Ship ships[][] = ocean.getShipArray();
-		int brow = getBowRow(); 
-		int bcolumn = getBowColumn(); 
+		int brow = getBowRow();
+		int bcolumn = getBowColumn();
 		boolean bhorizontal = isHorizontal();
-		
-		for (int i = 0; i < hit.length ; i++){
+
+		for (int i = 0; i < hit.length; i++) {
 			ships[brow][bcolumn] = new HitType("$");
-			
+
 			if (bhorizontal) {
 				bcolumn++;
 			} else {
 				brow++;
 			}
-			
-			//System.out.println("Bow Column " + getBowColumn() + " Bow Row " + getBowRow() + " Is Horizontal " + isHorizontal());
-			//row = row + i;
-			
+
+			// System.out.println("Bow Column " + getBowColumn() + " Bow Row " +
+			// getBowRow() + " Is Horizontal " + isHorizontal());
+			// row = row + i;
+
 		}
-			
+
 	}
 
 	/**
@@ -239,7 +284,8 @@ public abstract class Ship {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public String setHit(String hit){
+
+	public String setHit(String hit) {
 		return hit;
 	}
 }

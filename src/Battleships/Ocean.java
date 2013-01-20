@@ -77,30 +77,31 @@ public class Ocean {
 		return buffer.toString();
 	}
 
-	private void setShipsSunk(int i){
-		// If not initialised add one to hit count 
-		if (i!=0)
-		shipsSunk = shipsSunk + 1;
+	private void setShipsSunk(int i) {
+		// If not initialised add one to hit count
+		if (i != 0)
+			shipsSunk = shipsSunk + 1;
 	}
 
 	private void setHitCount(int i) {
-		// If not initialised add one to hit count 
-		if (i!=0)
-		hitCount = hitCount + 1;
-		
+		// If not initialised add one to hit count
+		if (i != 0)
+			hitCount = hitCount + 1;
+
 	}
 
 	private void setShotsFired(int i) {
-		// If not initialised add one to hit count 
-		if (i!=0)
-		shotsFired = shotsFired + 1;
+		// If not initialised add one to hit count
+		if (i != 0)
+			shotsFired = shotsFired + 1;
 	}
-	
+
 	private Object getShipsSunk() {
-		// TODO Auto-generated method stub
-		
+		// returns ships sunk total
+
 		return (this.shipsSunk);
 	}
+
 	/**
 	 * @return the size of the row/column
 	 */
@@ -145,7 +146,8 @@ public class Ocean {
 	}
 
 	/**
-	 * Checks whether the location contains anything other than empty sea or hit type.
+	 * Checks whether the location contains anything other than empty sea or hit
+	 * type.
 	 * 
 	 * @param row
 	 *            the x position on the board
@@ -180,12 +182,11 @@ public class Ocean {
 			// get the ship
 			board[row][column].shootAt(row, column);
 			setHitCount(getHitCount() + 1);
-			if (board[row][column].isSunk())
-			{
-				//Add one to ships sunk;
+			if (board[row][column].isSunk()) {
+				// Add one to ships sunk;
 				setShipsSunk(1);
 				return true;
-			}	
+			}
 		}
 		return false;
 	}
@@ -208,13 +209,13 @@ public class Ocean {
 	 */
 
 	public boolean isGameOver() {
-		System.out.println("The get ship sunk is " + this.getShipsSunk());
-		System.out.println("The shots fired is " + this.shotsFired);
-		System.out.println("The hit count is " + this.hitCount);
+		//System.out.println("The get ship sunk is " + this.getShipsSunk());
+		//System.out.println("The shots fired is " + this.shotsFired);
+		//System.out.println("The hit count is " + this.hitCount);
 		// check whether all board in fleet have been sunk
 		if (this.getShipsSunk().equals(UPPER))
 			return true;
-		
+
 		return false;
 	}
 
@@ -243,42 +244,27 @@ public class Ocean {
 		return strbld.toString();
 	}
 
-
-
 	public void updateBoard(int row, int column, Ocean ocean) {
 
 		Ship[][] sea = ocean.getShipArray();
-		// if a ship type is hit mark with an H else mark with an X 
-		if (!(sea[row][column] instanceof HitType)){
-		if(sea[row][column] instanceof Submarine || sea[row][column] instanceof BattleShip || sea[row][column] instanceof Cruiser || sea[row][column] instanceof Destroyer )
-		{
-			//if ships is sunk update board with dollar sign
-			
-			if (board[row][column].isSunk()){
-				board[row][column].sinkShip(ocean);
-				
-			} else {
-			sea[row][column] = new HitType("H");
-			}
-			
-		//	Ship sub = new BattleShip();
-		//System.out.println("BAt is " + sub);
-			
-			//setShipsSunk(1);
-		} 
-		else 
-		{
-			sea[row][column] = new HitType("X");
-		}
-		
-		//if ()
-		//System.out.println("Values of after is " + sea[row][column]);
-		//if (sea[row][column].getType())
-		//	sea[row][column] = new HitType("$");
-		}
+		// if a ship type is hit mark with an H else mark with an X
+		if (!(sea[row][column] instanceof HitType)) {
+			if (sea[row][column] instanceof Submarine
+					|| sea[row][column] instanceof BattleShip
+					|| sea[row][column] instanceof Cruiser
+					|| sea[row][column] instanceof Destroyer) {
+				// if ships is sunk update board with dollar sign
 
-			
-		//}
+				if (board[row][column].isSunk()) {
+					board[row][column].sinkShip(ocean);
+
+				} else {
+					sea[row][column] = new HitType("H");
+				}
+			} else {
+				sea[row][column] = new HitType("X");
+			}
+		}
 	}
 
 	public Ocean(Ship[][] board, int shotsFired, int hitCount, int shipsSunk) {
