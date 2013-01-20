@@ -17,6 +17,6 @@ public class Cruiser extends Ship {
      * sets the length & clears the hit array
      */
     public Cruiser() {
-        super(SIZE, "Cruiser", "C");
+        super(SIZE, "Cruiser", ".");
     }
 }

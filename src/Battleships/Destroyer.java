@@ -17,6 +17,6 @@ public class Destroyer extends Ship {
      * sets the length & clears the hit array
      */
     public Destroyer() {
-        super(SIZE, "Destroyer", "D");
+        super(SIZE, "Destroyer", ".");
     }
 }

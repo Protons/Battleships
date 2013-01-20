@@ -236,11 +236,11 @@ public class Ocean {
 	 */
 	public String printFinalScores() {
 		StringBuilder strbld = new StringBuilder();
-		strbld.append("GAME OVER!! You scored ").append(this.hitCount)
+		strbld.append("GAME OVER!! You scored ").append(this.shotsFired)
 				.append(".");
 		strbld.append("You sank ").append(this.getShipsSunk()).append(" ships");
-		strbld.append(" and used ").append(this.shotsFired)
-				.append(" shots" + ".");
+		strbld.append(" and shot ").append(this.hitCount)
+				.append(" shots for 10 ships, bla" + ".");
 		return strbld.toString();
 	}
 

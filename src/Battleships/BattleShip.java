@@ -17,6 +17,6 @@ public class BattleShip extends Ship {
      * sets the length & clears the hit array
      */
     public BattleShip() {
-        super(SIZE, "Battleship", "B");
+        super(SIZE, "Battleship", ".");
     }
 }

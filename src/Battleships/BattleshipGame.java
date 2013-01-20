@@ -36,15 +36,15 @@ public class BattleshipGame {
                 // accept shots & check whether it's a hit (in Ocean)
                 if (!sea.shootAt(p.getX(), p.getY())) // a miss
                 {
-                	System.out.println("A miss, try again.");
-                	                	
                 	sea.updateBoard(p.getX(), p.getY(), sea);
+                	
+                	System.out.println("A miss, try again.");
                 } else
                 {
                 	sea.updateBoard(p.getX(), p.getY(), sea);
                 }
-                //System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); //clear screen kind of
                 
+                System.out.print("\n\n\n"); //add a few lines
                 System.out.println(sea);
                 System.out.println("[. is empty sea; X is a miss; H is a hit; $ is a sunken ship.]");
                 
