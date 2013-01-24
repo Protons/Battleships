@@ -17,6 +17,7 @@ public class Submarine extends Ship {
 	 * sets the length & clears the hit array
 	 */
 	public Submarine() {
-		super(SIZE, "Submarine", ".");
+		// for the sake of easy testing I have left the short name instead of removing it.
+		super(SIZE, "Submarine", "S");
 	}
 }
