@@ -69,70 +69,24 @@ public abstract class Ship {
 	 */
 	public boolean okToPlaceShipAt(int row, int column, boolean horizontal,
 			Ocean ocean) {
+		
 		// try catch exception error if ship goes past board
 		try {
-			Ship ships[][] = ocean.getShipArray();
-
-			// check if another ship is on either left size or right
-			if (row + getSize() < ocean.getDimension()) {
-				// check for ship to the bottom of ship when vertical
-				if (!horizontal
-						&& !(ships[row + getSize()][column] instanceof EmptySea))
+			//check if ship exists in that exact spot
+			 Ship ships[][] = ocean.getShipArray();
+				if (!(ships[row][column] instanceof EmptySea)) 
 					return false;
-			}
-			if ((row - 1) >= 0) {
-				// check for ship to the top of ship when vertical
-				if (!horizontal
-						&& !(ships[row - 1][column] instanceof EmptySea))
-					return false;
-			}
-			if ((column - 1) >= 0) {
-				// check for ship to the left of ship when horizontal
-				if (horizontal && !(ships[row][column - 1] instanceof EmptySea))
-					return false;
-			}
-			if (column + getSize() < ocean.getDimension()) {
-				// check for ship to the right of ship when horizontal
-				if (horizontal
-						&& !(ships[row][column + getSize()] instanceof EmptySea))
-					return false;
-			}
-
-			for (int i = 0; i < getSize(); i++) {
-				if (!(ships[row][column] instanceof EmptySea)) {
-					return false;
-				}
-				// check below if ship exists and not off board
-				else if (horizontal
-						&& !(ships[row + 1][column] instanceof EmptySea)
-						&& ((row + 1) < ocean.getDimension())) {
-					return false;
-				}
-				// check above if ship exists and not off board
-				else if (horizontal
-						&& !(ships[row - 1][column] instanceof EmptySea)
-						&& ((row - 1) >= 0)) {
-					return false;
-				}
-				// check to the left if ship exists and not off board
-				else if (!horizontal
-						&& !(ships[row][column + 1] instanceof EmptySea)
-						&& ((column + 1) < ocean.getDimension())) {
-					return false;
-				}
-				// check to the right if ship exists and not off board
-				else if (!horizontal
-						&& !(ships[row][column - 1] instanceof EmptySea)
-						&& ((column - 1) >= 0)) {
-					return false;
-				} else {
-					if (horizontal) {
-						column++;
-					} else {
-						row++;
-					}
-				}
-			}
+				
+			// check if another ship is on either left  or right side
+			if (!(isLeft(row, column, horizontal, ocean)))
+				return false;
+			if (!(isRight(row, column, horizontal, ocean)))
+				return false;
+			if (!(isTop(row, column, horizontal, ocean)))
+				return false;
+			if (!(isBottom(row, column, horizontal, ocean)))
+				return false;
+			
 			return true;
 		}
 		// catch the error
@@ -178,12 +132,12 @@ public abstract class Ship {
 	}
 
 	private void setHorizontal(boolean horizontal2) {
-		// sets horizontal to incoming value  
+		// sets horizontal to incoming value
 		horizontal = horizontal2;
 	}
 
 	private void setBowColumn(int column) {
-		// sets bow column 
+		// sets bow column
 		bowColumn = column;
 	}
 
@@ -206,7 +160,8 @@ public abstract class Ship {
 				|| (!isHorizontal() && (column != getBowColumn()))) {
 			return false; // it's not a hit
 		} else {
-			// it's a hit. Work out offset & set that position in hit array to true
+			// it's a hit. Work out offset & set that position in hit array to
+			// true
 			hit[(row - getBowRow() + column - getBowColumn())] = true;
 
 			return true;
@@ -235,9 +190,6 @@ public abstract class Ship {
 	 * @return true if every part of the ship has been hit, false otherwise.
 	 */
 	public boolean isSunk() {
-
-		// for (boolean c : hit)
-		// System.out.println("The Value of b is " + c);
 
 		for (boolean b : hit)
 			if (b == false)
@@ -268,7 +220,105 @@ public abstract class Ship {
 		}
 
 	}
+	/**
+	 * checks whether there is ship on the left
+	 * 
+	 * @return true if nothing is on the left, false otherwise.
+	 */
+	public boolean isLeft(int row, int column, boolean horizontal, Ocean ocean) {
 
+		Ship ships[][] = ocean.getShipArray();
+
+		// check if ship doesn't go off board
+		if ((column - 1) >= 0) {
+			// check for ship to the left, top left and bottom left of ship when horizontal
+			if (horizontal && !(ships[row][column - 1] instanceof EmptySea))
+				return false;
+			if (horizontal	&& !(ships[row + 1][column - 1] instanceof EmptySea))
+				return false;
+			if (horizontal	&& !(ships[row - 1][column - 1] instanceof EmptySea))
+				return false;
+		}
+		// check for ships on left if vertical
+		for (int i = 0; i < getSize(); i++){
+			if (!horizontal
+					&& !(ships[row][column - 1] instanceof EmptySea)
+					&& ((column - 1) >= 0)) 
+				return false;
+				row++;
+		}
+		
+		return true;
+	}
+	
+	public boolean isRight(int row, int column, boolean horizontal, Ocean ocean) {
+		Ship ships[][] = ocean.getShipArray();
+		// check if ship doesn't go off board
+		if (column + getSize() < ocean.getDimension()) {
+			// check for ship to the right, top right and top left right of ship when horizontal
+			if (horizontal && !(ships[row][column + getSize()] instanceof EmptySea))
+				return false;
+			if (horizontal && !(ships[row + 1][column + getSize()] instanceof EmptySea))
+				return false;
+			if (horizontal && !(ships[row - 1][column + getSize()] instanceof EmptySea))
+				return false;
+		}
+		for (int i = 0; i < getSize(); i++){
+			if (!horizontal
+					&& !(ships[row][column + 1] instanceof EmptySea)
+					&& ((column + 1) < ocean.getDimension())) 
+				return false;
+				row++;
+		}
+		
+		return true;
+	}
+	public boolean isTop(int row, int column, boolean horizontal, Ocean ocean) {
+		Ship ships[][] = ocean.getShipArray();
+		// check if ship is not off board
+		if ((row - 1) >= 0) {
+			// check if ship is on top left, top right and top when vertical
+		if (!horizontal && !(ships[row - 1][column] instanceof EmptySea))
+			return false;
+		if (!horizontal && !(ships[row - 1][column - 1] instanceof EmptySea))
+			return false;
+		if (!horizontal && !(ships[row - 1][column + 1] instanceof EmptySea))
+			return false;
+		}
+		for (int i = 0; i < getSize(); i++) {
+			if (horizontal
+					&& !(ships[row - 1][column] instanceof EmptySea)
+					&& ((row - 1) >= 0)) 
+				return false;
+			column++;
+		}
+		
+		return true;
+	}
+	public boolean isBottom(int row, int column, boolean horizontal, Ocean ocean) {
+		Ship ships[][] = ocean.getShipArray();
+		
+		// check if a ship is not off board
+		if (row + getSize() < ocean.getDimension()) {
+		// check if ship is on bottom left, bottom right and bottom when vertical
+		if (!horizontal	&& !(ships[row + getSize()][column] instanceof EmptySea))
+			return false;
+		if (!horizontal	&& !(ships[row + getSize()][column + 1] instanceof EmptySea))
+			return false;
+		if (!horizontal	&& !(ships[row + getSize()][column - 1] instanceof EmptySea))
+			return false;
+		}
+		// check if ship is below if horizontal
+		for (int i = 0; i < getSize(); i++) {
+			if (horizontal
+					&& !(ships[row + 1][column] instanceof EmptySea)
+					&& ((row + 1) < ocean.getDimension())) 
+				return false;
+			column++;
+		}
+		
+		return true;
+	}
 	/**
 	 * @return a single character String to use in Ocean's print method
 	 */

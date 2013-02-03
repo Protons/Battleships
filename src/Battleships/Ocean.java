@@ -240,7 +240,10 @@ public class Ocean {
 				.append(" shots for 10 ships, bla" + ".");
 		return strbld.toString();
 	}
-
+	/**
+	 * Updates the board to the type of hit that has been done
+	 * at the moment the hit is H and miss is X and ship sunk is $
+	 */
 	public void updateBoard(int row, int column, Ocean ocean) {
 
 		Ship[][] sea = ocean.getShipArray();
@@ -263,6 +266,12 @@ public class Ocean {
 			}
 		}
 	}
+	
+
+//	public boolean isEdge(int row, int column, boolean horizontal,
+//			Ocean ocean){
+//		return true;
+//	}
 
 	public Ocean(Ship[][] board, int shotsFired, int hitCount, int shipsSunk) {
 		super();
