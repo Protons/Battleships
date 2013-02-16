@@ -1,124 +1,106 @@
 package Test;
 
-import static org.junit.Assert.*;
-
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import Battleships.EmptySea;
+import Battleships.Ocean;
+import Battleships.Ship;
+
 public class OceanTest {
+    private Ocean oc;
 
-	@Test
-	public void testOcean() {
-		fail("Not yet implemented");
-	}
+    @Before
+    public void setUp() throws Exception {
+        oc = new OceanImpl();
+    }
 
-	@Test
-	public void testToString() {
-		fail("Not yet implemented");
-	}
+    @After
+    public void tearDown() throws Exception {
 
-	@Test
-	public void testGetDimension() {
-		fail("Not yet implemented");
-	}
+    }
 
-	@Test
-	public void testPlaceAllShipsRandomly() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void testConstruction() {
 
-	@Test
-	public void testIsOccupied() {
-		fail("Not yet implemented");
-	}
+    }
 
-	@Test
-	public void testShootAt() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void testPlaceAllShipsRandomly() throws Exception {
+        fail("oops");
+    }
 
-	@Test
-	public void testIsGameOver() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void testIsOccupied() throws Exception {
 
-	@Test
-	public void testGetShipArray() {
-		fail("Not yet implemented");
-	}
+    }
 
-	@Test
-	public void testPrintFinalScores() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void testShootAt() throws Exception {
+        int x = 3;
+        int y = 4;
+        Ship[][] board = oc.getShipArray();
+        // setup ocean with Ship at x,y
+        board[x][y] = new SubmarineImpl();
+        // fire at x,y
+        assertTrue(oc.shootAt(x,y));
+    }
 
-	@Test
-	public void testUpdateBoard() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void testMissAt(){
+        assertFalse(oc.shootAt(0,0));
+    }
 
-	@Test
-	public void testOceanShipArrayArrayIntIntInt() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void testGetShotsFired() throws Exception {
 
-	@Test
-	public void testObject() {
-		fail("Not yet implemented");
-	}
+    }
 
-	@Test
-	public void testGetClass() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void testInitialGetHitCount() throws Exception {
+        assertEquals(0, oc.getHitCount());
+    }
 
-	@Test
-	public void testHashCode() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void testLaterGetHitCount(){
+        // setup scenario for four hits
+        // test for correct number of hits
+        assertEquals(4, oc.getHitCount());
+    }
 
-	@Test
-	public void testEquals() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void testGetShipsSunk() throws Exception {
+        assertEquals(0,oc.getShipsSunk());
+    }
 
-	@Test
-	public void testClone() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void testIsGameOver() throws Exception {
+        // setup end of game
+        assertTrue(oc.isGameOver());
+    }
 
-	@Test
-	public void testToString1() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void testGameIsNotOver() {
+        // setup nothing
+        assertFalse(oc.isGameOver());
+    }
 
-	@Test
-	public void testNotify() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void testGetShipArray() throws Exception {
+        Ship[][] ship = oc.getShipArray();
+        for(Ship[] sarr: ship)
+            for(Ship s : sarr)
+                assertTrue(s instanceof Ship);
+    }
 
-	@Test
-	public void testNotifyAll() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void testPrint() throws Exception {
 
-	@Test
-	public void testWaitLong() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testWaitLongInt() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testWait() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testFinalize() {
-		fail("Not yet implemented");
-	}
-
+    }
 }
