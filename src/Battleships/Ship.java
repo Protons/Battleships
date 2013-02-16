@@ -229,9 +229,9 @@ public abstract class Ship {
         Ship ships[][] = ocean.getShipArray();
         //.xxx.
         //x...x
-        //x...x row = 0 
-        //x...x column = 2 
-        //x...x
+        //x...x row = 3 
+        //x...x column = 0 
+        //x...x vertical
         //.xxx.
         // check if ship on left edge of board
         if (column == 0) 
@@ -279,9 +279,9 @@ public abstract class Ship {
         // check if ship doesn't go off board
         //.xxx.
         //x...x
-        //x...x row =0 
-        //x..xx column = 2
-        //x...x
+        //x...x row = 3 
+        //x..xx column = 0
+        //x...x vertical
         //.xxx.
         if ((!horizontal && column == 9) || (horizontal && (column + getSize() -1) == 9))
         	return true;
@@ -326,9 +326,9 @@ public abstract class Ship {
         Ship ships[][] = ocean.getShipArray();
         //.xxx.
         //x....
-        //x...x row = 0
-        //x...x column = 2
-        //x....
+        //x...x row = 3
+        //x...x column = 0
+        //x.... vertical
         //.xxx.
         // check if ship is in top of board 
         if (row == 0)
@@ -338,17 +338,18 @@ public abstract class Ship {
             // check if ship is on top when ship at left edge of board
             if (!horizontal){
             	// check if ship is on top when ship at left edge of board
-            	if (row == 0)
+            	if (column == 0)
             		if (!(ships[row - 1][column] instanceof EmptySea) 
             			|| !(ships[row - 1][column + 1] instanceof EmptySea))
             		return false;
             //	check if ship is on top when ship at right edge of board
-            	if (row == 9)
+            	if (column == 9)
             		if (!(ships[row - 1][column] instanceof EmptySea) 
                 		|| !(ships[row - 1][column - 1] instanceof EmptySea))
                 	return false;
            //  check if ship on top anywhere else on board 	
-            	if (row > 0 && row < 9 && column > 0 && column < 9) 
+            //	if (row > 0 && row < 9 && column > 0 && column < 9)
+            	if (column > 0 && column < 9 && row >= 0 && row <= 9)	
             	if (!(ships[row - 1][column] instanceof EmptySea)
             			|| !(ships[row - 1][column - 1] instanceof EmptySea)
             			|| !(ships[row - 1][column + 1] instanceof EmptySea))
@@ -375,9 +376,9 @@ public abstract class Ship {
         Ship ships[][] = ocean.getShipArray();
         //.xxx.
         //x....
-        //x...x row = 0
-        //x...x column = 2
-        //x....
+        //x...x row = 3
+        //x...x column = 0
+        //x.... vertical
         //.xxx.
         // check if a ship is on bottom of board 
         if ((horizontal && row == 9) || (!horizontal && (row + getSize() -1) == 9))
