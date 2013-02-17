@@ -4,7 +4,10 @@
  *
  */
 package Battleships;
-
+/**
+ * @author Proton
+ *
+ */
 public class Position {
 
 	private int row, column;

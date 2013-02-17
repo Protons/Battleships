@@ -4,6 +4,10 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * @author Proton && KLM
+ * 
+ */
 public class BattleshipGame {
 
 	/**
@@ -36,7 +40,6 @@ public class BattleshipGame {
 				if (!sea.shootAt(p.getX(), p.getY())) // a miss
 				{
 					sea.updateBoard(p.getX(), p.getY(), sea);
-					System.out.println("A miss, try again.");
 				} else {
 					sea.updateBoard(p.getX(), p.getY(), sea);
 				}
@@ -44,7 +47,7 @@ public class BattleshipGame {
 				System.out.print("\n\n\n"); // add a few lines
 				System.out.println(sea);
 				System.out
-						.println("[. is empty sea; X is a miss; H is a hit; $ is a sunken ship.]");
+						.println("[. is empty sea; - is a miss; X is a hit; $ is a sunken ship.]");
 
 				// System.out.println();
 			} while (!sea.isGameOver());
@@ -89,7 +92,8 @@ public class BattleshipGame {
 					coordinate = input.nextInt();
 				} while (coordinate < 0 || coordinate > limit - 1);
 				return coordinate;
-			} // checks for not an integer
+			}
+			// checks for not an integer
 			catch (Exception ex) {
 				System.err
 						.println("Invalid answer - please enter a number between 0-"

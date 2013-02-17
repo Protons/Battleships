@@ -7,7 +7,8 @@
 package Battleships;
 
 /**
- * @author KLM
+ * @author KLM && Proton
+ *
  */
 public class BattleShip extends Ship {
 

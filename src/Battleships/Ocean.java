@@ -8,6 +8,7 @@ package Battleships;
 /**
  * @author MARGARET WRIGHT
  * @author KLM
+ * @author Proton
  */
 
 import lombok.AccessLevel;
@@ -26,7 +27,7 @@ public class Ocean {
 	private int shotsFired;
 	@Getter
 	@Setter(AccessLevel.PRIVATE)
-	private int hitCount;
+	private int missCount;
 	@Getter
 	@Setter(AccessLevel.PRIVATE)
 	private int shipsSunk;
@@ -47,7 +48,7 @@ public class Ocean {
 			}
 		}
 		setShotsFired(0);
-		setHitCount(0);
+		setMissCount(0);
 		setShipsSunk(0);
 	}
 
@@ -83,10 +84,10 @@ public class Ocean {
 			shipsSunk = shipsSunk + 1;
 	}
 
-	private void setHitCount(int i) {
+	private void setMissCount(int i) {
 		// If not initialised add one to hit count
 		if (i != 0)
-			hitCount = hitCount + 1;
+			missCount = missCount + 1;
 
 	}
 
@@ -181,7 +182,7 @@ public class Ocean {
 		if (isOccupied(row, column)) { // okay - this is a ship
 			// get the ship
 			board[row][column].shootAt(row, column);
-			setHitCount(getHitCount() + 1);
+			// setHitCount(getHitCount() + 1);
 			if (board[row][column].isSunk()) {
 				// Add one to ships sunk;
 				setShipsSunk(1);
@@ -191,8 +192,8 @@ public class Ocean {
 		return false;
 	}
 
-	private int getHitCount() {
-		// return getHitCount for hits count 
+	private int getMissCount() {
+		// return getHitCount for hits count
 		return 1;
 	}
 
@@ -236,13 +237,14 @@ public class Ocean {
 		strbld.append("GAME OVER!! You scored ").append(this.shotsFired)
 				.append(".");
 		strbld.append("You sank ").append(this.getShipsSunk()).append(" ships");
-		strbld.append(" and shot ").append(this.hitCount)
-				.append(" shots for 10 ships, bla" + ".");
+		strbld.append(" and missed ").append(this.missCount)
+				.append(" times for 10 ships, bla bla" + ".");
 		return strbld.toString();
 	}
+
 	/**
-	 * Updates the board to the type of hit that has been done
-	 * at the moment the hit is H and miss is X and ship sunk is $
+	 * Updates the board to the type of hit that has been done at the moment the
+	 * hit is H and miss is X and ship sunk is $
 	 */
 	public void updateBoard(int row, int column, Ocean ocean) {
 
@@ -259,25 +261,15 @@ public class Ocean {
 					board[row][column].sinkShip(ocean);
 
 				} else {
-					sea[row][column] = new HitType("H");
+					sea[row][column] = new HitType("X");
+					System.out
+							.println("You hit part of a ship!!! Whoop Whoop!!!");
 				}
 			} else {
-				sea[row][column] = new HitType("X");
+				sea[row][column] = new HitType("-");
+				setMissCount(getMissCount() + 1);
+				System.out.println("You missed, try again puppy!!!");
 			}
 		}
-	}
-	
-
-//	public boolean isEdge(int row, int column, boolean horizontal,
-//			Ocean ocean){
-//		return true;
-//	}
-
-	public Ocean(Ship[][] board, int shotsFired, int hitCount, int shipsSunk) {
-		super();
-		this.board = board;
-		this.shotsFired = shotsFired;
-		this.hitCount = hitCount;
-		this.shipsSunk = shipsSunk;
 	}
 }
